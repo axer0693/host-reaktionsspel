@@ -15,9 +15,7 @@ input.onButtonPressed(Button.A, function () {
         basic.showString("Not enough players")
     }
 })
-// Kommer få recievedString i formen "P#:[time]"
 radio.onReceivedString(function (receivedString) {
-    // får ut tiden av P1 och P2 när de skickar in data. Noterar bara deras första input
     if (receivedString.includes(convertToText(idP1)) && timeP1 == 0) {
         temp = receivedString.split(":")
         timeP1 = parseFloat(temp[1])
@@ -25,7 +23,6 @@ radio.onReceivedString(function (receivedString) {
         temp = receivedString.split(":")
         timeP2 = parseFloat(temp[1])
     }
-    // Checkar vem som var snabbast och ger poäng till den snabbaste. Ger poäng till båda vid samma tid.
     if (timeP1 != 0 && timeP2 != 0) {
         if (timeP1 > timeP2) {
             scorep1 += 1
