@@ -12,14 +12,17 @@ input.onButtonPressed(Button.A, function () {
     } else if (idP1 != 0 && idP2 != 0) {
         radio.sendString("" + (list._pickRandom()))
     } else {
-        basic.showString("Not enough players")
+        basic.showString("...")
     }
 })
 radio.onReceivedString(function (receivedString) {
+    basic.showString(receivedString)
     if (receivedString.includes(convertToText(idP1)) && timeP1 == 0) {
+        basic.showString("P1")
         temp = receivedString.split(":")
         timeP1 = parseFloat(temp[1])
     } else if (receivedString.includes(convertToText(idP2)) && timeP2 == 0) {
+        basic.showString("P2")
         temp = receivedString.split(":")
         timeP2 = parseFloat(temp[1])
     }
@@ -43,7 +46,7 @@ input.onButtonPressed(Button.B, function () {
     if (idP1 != 0 && idP2 != 0) {
         basic.showString("" + scorep1 + ":" + scorep2)
     } else {
-        basic.showString("Waiting for players")
+        basic.showString("...")
     }
 })
 let gameInProgress = false
