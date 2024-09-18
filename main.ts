@@ -1,3 +1,14 @@
+function getPTime (P: string, receivedString: string) {
+    if (P == "P1") {
+        basic.showString("P1")
+        temp = receivedString.split(":")
+        timeP1 = parseFloat(temp[1])
+    } else if (P == "P2") {
+        basic.showString("P2")
+        temp = receivedString.split(":")
+        timeP2 = parseFloat(temp[1])
+    }
+}
 radio.onReceivedNumber(function (receivedNumber) {
     if (idP1 == 0) {
         idP1 = receivedNumber
@@ -31,20 +42,18 @@ input.onButtonPressed(Button.AB, function () {
 radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
     if (receivedString.includes(convertToText(idP1)) && timeP1 == 0) {
-        basic.showString("P1")
-        temp = receivedString.split(":")
-        timeP1 = parseFloat(temp[1])
+        getPTime("P1", receivedString)
     } else if (receivedString.includes(convertToText(idP2)) && timeP2 == 0) {
-        basic.showString("P2")
-        temp = receivedString.split(":")
-        timeP2 = parseFloat(temp[1])
+        getPTime("P2", receivedString)
     }
     if (timeP1 != 0 && timeP2 != 0) {
         if (timeP1 > timeP2) {
             scorep1 += 1
+            sendWhoScored(idP1)
             basic.showString("P1")
         } else if (timeP2 > timeP1) {
             scorep2 += 1
+            sendWhoScored(idP2)
             basic.showString("P2")
         } else {
             scorep1 += 1
@@ -62,6 +71,9 @@ input.onButtonPressed(Button.B, function () {
         basic.showString("...")
     }
 })
+function sendWhoScored (pId: number) {
+    radio.sendString("" + convertToText(pId) + "scored")
+}
 let gameInProgress = false
 let timeP2 = 0
 let timeP1 = 0
