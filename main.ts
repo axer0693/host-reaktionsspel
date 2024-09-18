@@ -48,11 +48,11 @@ radio.onReceivedString(function (receivedString) {
         getPTime("P2", receivedString)
     }
     if (timeP1 != 0 && timeP2 != 0) {
-        if (timeP1 > timeP2) {
+        if (timeP1 < timeP2) {
             scorep1 += 1
             sendWhoScored(idP1)
             basic.showString("P1")
-        } else if (timeP2 > timeP1) {
+        } else if (timeP2 < timeP1) {
             scorep2 += 1
             sendWhoScored(idP2)
             basic.showString("P2")
