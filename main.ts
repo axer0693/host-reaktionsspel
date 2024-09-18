@@ -38,6 +38,7 @@ input.onButtonPressed(Button.AB, function () {
         } else {
             radio.sendString("Tie")
         }
+        basic.showString("Reset")
         reset()
     }
 })
