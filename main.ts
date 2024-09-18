@@ -42,7 +42,6 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 radio.onReceivedString(function (receivedString) {
-    basic.showString(receivedString)
     if (receivedString.includes(convertToText(idP1)) && timeP1 == 0) {
         getPTime("P1", receivedString)
     } else if (receivedString.includes(convertToText(idP2)) && timeP2 == 0) {
