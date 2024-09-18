@@ -15,6 +15,19 @@ input.onButtonPressed(Button.A, function () {
         basic.showString("...")
     }
 })
+input.onButtonPressed(Button.AB, function () {
+    if (gameInProgress == true) {
+        gameInProgress = false
+        // tie
+        if (scorep1 > scorep2) {
+            radio.sendString("\"P1 Wins\"")
+        } else if (scorep2 > scorep1) {
+            radio.sendString("\"P2 Wins\"")
+        } else {
+            radio.sendString("Tie")
+        }
+    }
+})
 radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
     if (receivedString.includes(convertToText(idP1)) && timeP1 == 0) {
