@@ -12,8 +12,10 @@ function getPTime (P: string, receivedString: string) {
 radio.onReceivedNumber(function (receivedNumber) {
     if (idP1 == 0) {
         idP1 = receivedNumber
+        radio.sendNumber(idP1)
     } else if (idP2 == 0) {
         idP2 = receivedNumber
+        radio.sendNumber(idP2)
     }
 })
 input.onButtonPressed(Button.A, function () {
@@ -31,9 +33,9 @@ input.onButtonPressed(Button.AB, function () {
         gameInProgress = false
         // tie
         if (scorep1 > scorep2) {
-            radio.sendString("\"P1 Wins\"")
+            radio.sendString("" + idP1 + ":win")
         } else if (scorep2 > scorep1) {
-            radio.sendString("\"P2 Wins\"")
+            radio.sendString("" + idP2 + ":win")
         } else {
             radio.sendString("Tie")
         }
@@ -72,7 +74,7 @@ input.onButtonPressed(Button.B, function () {
     }
 })
 function sendWhoScored (pId: number) {
-    radio.sendString("" + convertToText(pId) + "scored")
+    radio.sendString("" + convertToText(pId) + ":" + "scored")
 }
 let gameInProgress = false
 let timeP2 = 0
