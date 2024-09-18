@@ -30,7 +30,6 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onButtonPressed(Button.AB, function () {
     if (gameInProgress == true) {
-        gameInProgress = false
         // tie
         if (scorep1 > scorep2) {
             radio.sendString("" + idP1 + ":win")
@@ -39,6 +38,7 @@ input.onButtonPressed(Button.AB, function () {
         } else {
             radio.sendString("Tie")
         }
+        reset()
     }
 })
 radio.onReceivedString(function (receivedString) {
@@ -75,14 +75,24 @@ input.onButtonPressed(Button.B, function () {
 function sendWhoScored (pId: number) {
     radio.sendString("" + convertToText(pId) + ":" + "scored")
 }
+function reset () {
+    idP1 = 0
+    idP2 = 0
+    scorep1 = 0
+    scorep2 = 0
+    temp = []
+    timeP1 = 0
+    timeP2 = 0
+    gameInProgress = false
+}
+let scorep2 = 0
+let scorep1 = 0
 let gameInProgress = false
+let idP2 = 0
+let idP1 = 0
 let timeP2 = 0
 let timeP1 = 0
 let temp: string[] = []
-let scorep2 = 0
-let scorep1 = 0
-let idP2 = 0
-let idP1 = 0
 let list: string[] = []
 let instruktion = "hej"
 list = [
@@ -96,11 +106,4 @@ list = [
 "Shake"
 ]
 radio.setGroup(95)
-idP1 = 0
-idP2 = 0
-scorep1 = 0
-scorep2 = 0
-temp = []
-timeP1 = 0
-timeP2 = 0
-gameInProgress = false
+reset()
